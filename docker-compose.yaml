@@ -1,0 +1,43 @@
+version: '3.5'
+services:
+
+  db:
+    image: mysql
+    container_name: mysql
+    hostname: mysql
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password
+
+  node-red:
+    build: node-red/docker
+    container_name: node-red
+    hostname: node-red
+    environment:
+      - IFTTT_KEY
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    ports:
+      - 1880:1880
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./node-red/:/data
+    depends_on:
+      - db
+
+  cooja:
+    image: sbungartz/cooja
+    container_name: cooja
+    hostname: cooja
+    environment:
+      - DISPLAY=${HOSTNAME}:0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./tinyos/build:/build
+      - ./simulations:/simulations
+    command: ant run
