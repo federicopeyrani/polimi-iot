@@ -69,7 +69,7 @@ implementation
     event message_t* Receive.receive(message_t* bufPtr, void* payload, uint8_t len) {
         if (len == sizeof(exposure_notification_t)) {
             exposure_notification_t* msg = (exposure_notification_t*) payload;
-            printf("{\"sender_id\":%u,\"counter\":%u}\n", msg->sender_id, msg->counter);
+            printf("{\"node_id\":%u,\"sender_id\":%u,\"counter\":%u}\n", TOS_NODE_ID, msg->sender_id, msg->counter);
             printfflush();
         }
 
