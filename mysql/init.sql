@@ -22,6 +22,9 @@ CREATE TRIGGER check_subsequent_message
     BEFORE UPDATE
     ON exposure_notifications
     FOR EACH ROW
+    -- only increment the counter if the "message_counter" field of the received
+    -- message is not too far off from the previous value, so to keep track of
+    -- consecutive messages
     IF NEW.message_counter > OLD.message_counter AND NEW.message_counter <= OLD.message_counter + 4 THEN
         SET NEW.counter = OLD.counter + 1;
     ELSE
@@ -33,6 +36,8 @@ CREATE TRIGGER check_exposure
     BEFORE UPDATE
     ON exposure_notifications
     FOR EACH ROW
+    -- if the counter reaches a particular value, insert an entry inside "exposures"
+    -- and reset the counter
     IF NEW.counter >= 10 THEN
         BEGIN
             INSERT INTO exposures (node_id_1, node_id_2, date) VALUES (NEW.node_id, NEW.sender_id, current_timestamp);
