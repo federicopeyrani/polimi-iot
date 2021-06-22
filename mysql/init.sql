@@ -22,7 +22,7 @@ CREATE TRIGGER check_subsequent_message
     BEFORE UPDATE
     ON exposure_notifications
     FOR EACH ROW
-    IF NEW.message_counter = OLD.message_counter + 1 THEN
+    IF NEW.message_counter > OLD.message_counter AND NEW.message_counter <= OLD.message_counter + 4 THEN
         SET NEW.counter = OLD.counter + 1;
     ELSE
         SET NEW.counter = 0;
