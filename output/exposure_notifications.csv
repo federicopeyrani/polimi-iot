@@ -1,3 +1,4 @@
+node_id,sender_id,message_counter,counter
 5,3,326,0
 5,2,327,1
 5,1,326,8
