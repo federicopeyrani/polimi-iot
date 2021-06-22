@@ -35,7 +35,7 @@ implementation
         }
 
         call Timer.startPeriodic(PERIOD);
-        printf("Started radio\n");
+        printf("Mote %u: Started radio\n", TOS_NODE_ID);
 
         printfflush();
     }
