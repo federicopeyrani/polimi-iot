@@ -20,8 +20,14 @@ triggers can all be found there.
 
 `node-red/` contains the flow implementation inside the file `flows.json`.
 
-``simulation/`` contains the log output of the simulation run in Cooja, as well as an export of the
-database tables at the end of the simulation itself. 
+`output/` contains the log output of the simulation run in Cooja, as well as an export of the
+database tables at the end of the simulation itself. The file `log_nodered.txt` instead contains the captured
+output from Node-RED, which reports the same messages shown in Cooja, but also the notifications that are generated, 
+that in the log file would look like this:
+
+```
+node-red  | 23 Jun 18:56:02 - [info] [debug:6d904e1a.86e2f] {"node_id_1":1,"node_id_2":5,"date":"2021-06-23T18:55:57.000Z","delivered":0}
+```
 
 ## Docker
 
