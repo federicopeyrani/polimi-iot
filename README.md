@@ -7,7 +7,9 @@ must be installed: `node-red-node-mysql`. If the package is not installed all no
 to the database functionality won't render, but the flow will still be readable as said
 nodes contain no specific configuration (they just execute the query they are fed). If
 one wants to test the system, an automatic way of deploying Node-RED, the database and Cooja is provided
-with Docker (or just Node-RED and the database).
+with Docker (or just Node-RED and the database). An image of the flow is provided inside ``img/`` as reference.
+
+![alt Node-RED flow](img/flow.png)
 
 ## Folder structure
 
